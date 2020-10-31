@@ -47,22 +47,35 @@ function handleCellClick(evt) {
     console.log(evt.target)
     cellId = evt.target.id;
 
+    //has the cell been picked already?
+    //if player1Board includes(cellID)
+    if(player2Board.includes(cellId) || player1Board.includes(cellId)) return render();
+
+
     //if (player1's turn) -->target colors['1']
     if(player1Board.length === player2Board.length) {
         player1Board.push(cellId);
-        console.log(player1Board);
+       // console.log(player1Board);
+        playerArray = player1Board;
          } else {
-            player2Board.push(cellId);
-            console.log(player2Board);
-         }
-      
+        player2Board.push(cellId);
+       // console.log(player2Board);
+        playerArray = player2Board;
+    }
+    
+    //update game board
+    renderGameBoard(playerArray);{}
 
+    //Check if someone won!
 
-    //if (player2's turn) -->target colors['-1'] //setWhatever
-
-    //checkWincondition. search in player1's grid for winningCombo
     render();
 };
+
+function renderGameBoard(playerArray) {
+    //minipulateDOM
+    console.log(playerArray);
+
+}
 
 function render() {
 
