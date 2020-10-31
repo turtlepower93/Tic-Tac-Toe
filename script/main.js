@@ -46,35 +46,48 @@ init();
 function handleCellClick(evt) {
     console.log(evt.target)
     cellId = evt.target.id;
+    let currentPlayerChoice;
 
-    //has the cell been picked already?
-    //if player1Board includes(cellID)
+    //if cell is already picked... then pick again!
     if(player2Board.includes(cellId) || player1Board.includes(cellId)) return render();
 
-
-    //if (player1's turn) -->target colors['1']
+    //Switch between player turns
     if(player1Board.length === player2Board.length) {
         player1Board.push(cellId);
        // console.log(player1Board);
         playerArray = player1Board;
+        currentPlayer = colors['1'];
          } else {
         player2Board.push(cellId);
        // console.log(player2Board);
         playerArray = player2Board;
+        currentPlayer = colors['-1']
     }
     
     //update game board
-    renderGameBoard(playerArray);{}
-
-    //Check if someone won!
+    renderGameBoard(playerArray,currentPlayer,cellId);
+    weHaveWinner();
+    //Check if someone won! (if player1Board.length + player2Board.length === 9 THEN TIE)
 
     render();
 };
 
-function renderGameBoard(playerArray) {
+function renderGameBoard(playerArray,currentPlayer,cellId) {
     //minipulateDOM
+    
     console.log(playerArray);
+    console.log(currentPlayer);
+    playerArray.forEach(function () {
+        //debugger;
+        cellEl[cellId].style.background = currentPlayer;
+    })
 
+}
+
+function weHaveWinner() {
+    player1Board.forEach(function() {
+        
+    })
 }
 
 function render() {
@@ -82,7 +95,8 @@ function render() {
 }
 
 function clearBoard() {
-    
+    player1Board = [];
+    player2Board = [];
 }
 
 
