@@ -1,0 +1,26 @@
+* {
+    display: grid;
+
+}
+
+title {
+    display: none;
+}
+
+body {
+    height: 100vmin;
+    width: 100vmin;
+    margin: 0 auto;
+}
+
+.grid-container {
+    height: 90vh;
+    width: 90vh;
+    grid-template-columns: auto auto auto;
+    margin: auto auto;
+    border
+}
+
+.grid-container * {
+    border:1px solid black;
+}
