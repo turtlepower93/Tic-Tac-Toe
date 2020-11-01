@@ -2,8 +2,8 @@
 
     const colors = {
         'null': 'white',
-        '1': 'blue',
-        '-1': 'red'
+        '1': 'url(https://i.kym-cdn.com/photos/images/newsfeed/001/505/717/49b.jpg)',
+        '-1': 'url(https://i.kym-cdn.com/photos/images/newsfeed/001/505/718/136.jpg)'
     }
 
     const winningCombos = [
@@ -51,7 +51,7 @@ function handleCellClick(evt) {
     let currentPlayerChoice;
 
     //if cell is already picked... then pick again!
-    if(player2Board.includes(cellId) || player1Board.includes(cellId)) return render();
+    if(player2Board.includes(cellId) || player1Board.includes(cellId)) return;
 
     //Switch between player turns
     if(player1Board.length === player2Board.length) {
@@ -76,7 +76,6 @@ function handleCellClick(evt) {
     if(player1Board.length + player2Board.length === 9) {
         renderReplayButton();
     }
-    render();
 };
 
 function winCheck(currentPlayerBoard) {
@@ -101,13 +100,13 @@ function renderReplayButton() {
 }
 
 function renderGameBoard(playerArray,currentPlayer,cellId) {
-    //minipulateDOM
     
     console.log(playerArray);
     console.log(currentPlayer);
     playerArray.forEach(function () {
         //debugger;
         cellEl[cellId].style.background = currentPlayer;
+        cellEl[cellId].style.backgroundSize = 'cover';
     });
    
 
@@ -129,7 +128,6 @@ function clearBoard() {
 function init() {
     replayEl.style.visibility = "hidden";
     playerTurn = 1;
-
     clearBoard();
     render();
 }
