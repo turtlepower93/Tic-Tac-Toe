@@ -1,11 +1,23 @@
 * {
     display: grid;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: lightcoral;
 
 }
+head {
+    display: none;
+}
+h2 {
+    font-size: 5vmin;
+    text-align: center;
+    margin: 0 auto;
 
+}
 title, .replay {
     visibility: hidden;
     text-align: center;
+    font-size: 7vmin;
+    margin: 0 0;
 } 
 
 body {
@@ -15,14 +27,15 @@ body {
 }
 
 .grid-container {
-    height: 90vh;
-    width: 90vh;
+    height: 75vh;
+    width: 75vh;
     grid-template-columns: auto auto auto;
-    margin: auto auto;
+    margin: 0 auto;
 
 }
 
 .grid-container * {
     border:1px solid black;
+    background: lightslategray;
     /* display: block; */
 }

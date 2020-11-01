@@ -121,7 +121,7 @@ function clearBoard() {
     player1Board = [];
     player2Board = [];
     cellEl.forEach(function(ele) {
-        ele.style.background = 'white';
+        ele.style.background = 'lightslategray';
     })
     
 }
