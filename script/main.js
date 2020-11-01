@@ -1,25 +1,24 @@
 /*----- constants -----*/
 
     const colors = {
-        'null': null,
+        'null': 'white',
         '1': 'blue',
         '-1': 'red'
     }
 
-    const winningcombos = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6],
+    const winningCombos = [
+        ['0','1','2'],
+        ['3','4','5'],
+        ['6','7','8'],
+        ['0','3','6'],
+        ['1','4','7'],
+        ['2','5','8'],
+        ['0','4','8'],
+        ['2','4','6'],
     ]
 
 /*----- app's state (variables) -----*/
 
-let currentBoard = [null,null,null,null,null,null,null,null];
 let gameStatus;
 let player1Board = [];
 let player2Board = [];
@@ -28,8 +27,10 @@ let player2Board = [];
 /*----- cached element references -----*/
 
 const cellEl = document.querySelectorAll('.grid-container > *');
+const replayEl = document.querySelector('.replay');
+console.log(replayEl)
 
-console.log(cellEl[1].id) // ----> Gets specific ID for cell.
+//console.log(cellEl) // ----> Gets specific ID for cell.
 
 
 
@@ -37,11 +38,12 @@ console.log(cellEl[1].id) // ----> Gets specific ID for cell.
 
 document.querySelector('.grid-container').addEventListener('click', handleCellClick);
 
-document.getElementById('reset').addEventListener('click',init);
+document.querySelector('.replay').addEventListener('click',init);
 
 /*----- functions -----*/
 
 init();
+
 
 function handleCellClick(evt) {
     console.log(evt.target)
@@ -66,11 +68,37 @@ function handleCellClick(evt) {
     
     //update game board
     renderGameBoard(playerArray,currentPlayer,cellId);
-    weHaveWinner();
-    //Check if someone won! (if player1Board.length + player2Board.length === 9 THEN TIE)
 
+    if(winCheck(playerArray) === 'w') {
+        renderReplayButton();
+    }
+    //check if tie
+    if(player1Board.length + player2Board.length === 9) {
+        renderReplayButton();
+    }
     render();
 };
+
+function winCheck(currentPlayerBoard) {
+
+    for (i = 0;i<winningCombos.length;i++) {
+      hits = 0;
+      //console.log(winnerArray[i]);
+      for(j = 0; j<currentPlayerBoard.length;j++)
+      if(winningCombos[i].includes(currentPlayerBoard[j])) {
+        hits += 1;
+       // console.log('hits' + hits)
+        if(hits === 3){
+         return 'w';
+        }
+      }
+    }
+    return 'f';
+}
+    
+function renderReplayButton() {
+    replayEl.style.visibility = 'visible';
+}
 
 function renderGameBoard(playerArray,currentPlayer,cellId) {
     //minipulateDOM
@@ -80,14 +108,10 @@ function renderGameBoard(playerArray,currentPlayer,cellId) {
     playerArray.forEach(function () {
         //debugger;
         cellEl[cellId].style.background = currentPlayer;
-    })
+    });
+   
 
-}
 
-function weHaveWinner() {
-    player1Board.forEach(function() {
-        
-    })
 }
 
 function render() {
@@ -97,10 +121,13 @@ function render() {
 function clearBoard() {
     player1Board = [];
     player2Board = [];
+    cellEl.forEach(function(ele) {
+        ele.style.background = 'white';
+    })
+    
 }
-
-
 function init() {
+    replayEl.style.visibility = "hidden";
     playerTurn = 1;
 
     clearBoard();

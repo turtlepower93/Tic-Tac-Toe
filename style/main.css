@@ -3,9 +3,10 @@
 
 }
 
-title, h1 {
-    display: none;
-}
+title, .replay {
+    visibility: hidden;
+    text-align: center;
+} 
 
 body {
     height: 100vmin;
